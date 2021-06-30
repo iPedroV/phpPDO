@@ -92,7 +92,7 @@
                                 <input type="password" class="form-control" name="senha2" required>
                                 <label>CPF</label>
                                 <input type="text" class="form-control" name="cpf" required>
-                            </div>
+                            </div> 
 
                             
                         </div>
