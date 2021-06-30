@@ -102,14 +102,28 @@
                                 &nbsp; &nbsp;
                                 <input type="reset" class="btn btn-danger btInput" value="Limpar">
                             </div> 
-                            
                     </form>
                 </div>
             </div>
         </div>
     </div>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <?php
+            //envio dos dados para o banco
+            if(isset($_POST['cadastrar'])){
+                $nome = $_POST['nome'];
+                $dtNasc = $_POST['dtNasc'];
+                $login = $_POST['login'];
+                $senha = $_POST['senha'];
+                $perfil = $_POST['perfil'];
+                $cpf = $_POST['cpf'];
+                $email = $_POST['email'];
+                $pc = PessoaControler();
+                $pc->inserirPessoa()
+            }
+        ?>
+
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
