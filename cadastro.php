@@ -108,6 +108,7 @@
         </div>
     </div>
         <?php
+        include_once('');
             //envio dos dados para o banco
             if(isset($_POST['cadastrar'])){
                 $nome = $_POST['nome'];
@@ -117,8 +118,8 @@
                 $perfil = $_POST['perfil'];
                 $cpf = $_POST['cpf'];
                 $email = $_POST['email'];
-                $pc = PessoaControler();
-                $pc->inserirPessoa()
+                $pc = PessoaController();
+                $pc->inserirPessoa();
             }
         ?>
 
