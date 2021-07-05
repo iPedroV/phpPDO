@@ -14,6 +14,7 @@
         }
 
         .btInput {
+            margin-top: 20px;
             padding-left: 10px;
             padding-right: 10px;
         }
@@ -60,70 +61,44 @@
 
     <div class="container-fluid ">
         <div class="row">
-            <div class="col-8 offset-2">
+            <div class="col-4 offset-4">
                 <div class="card-header bg-light text-center">
-                    Cadastro do Cliente
+                    Cadastro de Produto
                 </div>
                 <div class="card-body border">
                     <form method="post" action="">
                         <div class="row g-3">
-                            <div class="col-md-6">
+                            <div class="col-md-6 offset-md-3">
                                 <label>Código</label><br>
-                                <label>Nome completo</label>
-                                <input type="text" class="form-control" name="nome" required>
-                                <label>Data de Nacimento</label>
-                                <input type="date" class="form-control" name="dtNasc" required>
-                                <label>Perfil</label>
-
-                                <select name="perfil" class="form-control">
-                                    <option>[--SELECT--]</option>
-                                    <option>Cliente</option>
-                                    <option>Funcionário</option>
-                                </select>
-                                <label>E-mail</label>
-                                <input type="email" class="form-control" name="email" required>
+                                <label>Produto</label>
+                                <input type="text" class="form-control" name="nomeProduto" required>
+                                <label>Valor de compra</label>
+                                <input type="text" class="form-control" name="vlrCompra" required>
+                                <label>Valor de venda</label>
+                                <input type="text" class="form-control" name="vlrVenda" required>
+                                <label>Qtde de venda</label>
+                                <input type="number" class="form-control" name="qtdEstoque" required>
+                                <input type="submit" name="cadastrarProduto" class="btn btn-success btInput" value="Enviar">
+                                &nbsp; &nbsp;
+                                <input type="reset" class="btn btn-danger btInput" value="Limpar">
                             </div>
-                            <div class="col-md-6 espaco">
-                                <label>Login</label>
-                                <input type="text" class="form-control" name="login">
-                                <label>Senha</label>
-                                <input type="password" class="form-control" name="senha" required>
-                                <label>Confirmar Senha</label>
-                                <input type="password" class="form-control" name="senha2" required>
-                                <label>CPF</label>
-                                <input type="text" class="form-control" name="cpf">
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-md-6 offset-5">
-                            <input type="submit" name="cadastrar" class="btn btn-success btInput" value="Enviar">
-                            &nbsp; &nbsp;
-                            <input type="reset" class="btn btn-danger btInput" value="Limpar">
                         </div>
                     </form>
                     <?php
-                    require_once('../php01/controller/PessoaController.php');
+                    include_once ('../php01/controller/ProdutoController.php');
                     //envio dos dados para o banco
-                    if (isset($_POST['cadastrar'])) {
-                        $nome = $_POST['nome'];
-                        $dtNasc = $_POST['dtNasc'];
-                        $login = $_POST['login'];
-                        $senha = $_POST['senha'];
-                        $perfil = $_POST['perfil'];
-                        $cpf = $_POST['cpf'];
-                        $email = $_POST['email'];
+                    if (isset($_POST['cadastrarProduto'])) {
+                        $nomeProduto = $_POST['nomeProduto'];
+                        $vlrCompra = $_POST['vlrCompra'];
+                        $vlrVenda = $_POST['vlrVenda'];
+                        $qtdEstoque = $_POST['qtdEstoque'];
 
-                        $pc = new PessoaController();
-                        echo "<p>" . $pc->inserirPessoa(
-                            $nome,
-                            $dtNasc,
-                            $login,
-                            $senha,
-                            $perfil,
-                            $email,
-                            $cpf
+                        $pc = new ProdutoController();
+                        echo "<p>" . $pc->inserirProduto(
+                            $nomeProduto,
+                            $vlrCompra,
+                            $vlrVenda,
+                            $qtdEstoque
                         ) . "</p>";
                     }
                     ?>

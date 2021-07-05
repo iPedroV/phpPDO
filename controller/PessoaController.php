@@ -1,5 +1,6 @@
 <?php
-include_once '../dao/daoGenerico.php';
+require_once 'C:/xampp/htdocs/php01/dao/daoGenerico.php';
+require_once 'C:/xampp/htdocs/php01/model/pessoa.php';
 
 class PessoaController{
     public function inserirPessoa($nome, $dtNasc, $login, $senha, $perfil, $email, $cpf ){
