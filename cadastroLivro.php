@@ -18,6 +18,18 @@
             padding-left: 10px;
             padding-right: 10px;
         }
+
+        tbody,
+        td,
+        tfoot,
+        th,
+        thead,
+        tr {
+            border-color: inherit;
+            border-style: solid;
+            border-width: 0;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -85,7 +97,7 @@
                         </div>
                     </form>
                     <?php
-                    include_once ('../projeto-php/controller/LivroController.php');
+                    include_once('../projeto-php/controller/LivroController.php');
                     //envio dos dados para o banco
                     if (isset($_POST['cadastrarLivro'])) {
                         $titulo = $_POST['titulo'];
@@ -103,7 +115,53 @@
                     }
                     ?>
                 </div>
+
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8 offset-md-2">
+            <table class="table">
+                <thead class="thead-light bg-dark text-white">
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Editora</th>
+                        <th scope="col">Estoque</th>
+                        <th scope="col-md-6">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $pcTable = new LivroController();
+                    $listaLivros = $pcTable->listarLivros();
+
+                    foreach ($listaLivros as $li) {
+                    ?>
+                        <tr>
+                            <td><?php print_r($li->getIdLivro()); ?></td>
+                            <td><?php print_r($li->getTitulo()); ?></td>
+                            <td><?php print_r($li->getAutor()); ?></td>
+                            <td><?php print_r($li->getEditora()); ?></td>
+                            <td><?php print_r($li->getQtdEstoque()); ?></td>
+                            <td><a class="btn btn-outline-dark" href="#">Editar</a>
+                                <a class="btn btn-outline-danger" href="#">Excluir</a>
+                            </td>
+                        </tr>
+
+                    <?php
+                    }
+
+                    ?>
+
+
+
+
+                </tbody>
+            </table>
+
         </div>
     </div>
 

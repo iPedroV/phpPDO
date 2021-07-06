@@ -1,6 +1,6 @@
 <?php
 include_once 'C:/xampp/htdocs/projeto-php/bd/conectaCasa.php';
-include_once ('C:/xampp/htdocs/projeto-php/model/livro.php');
+include_once 'C:/xampp/htdocs/projeto-php/model/livro.php';
 
 class daoLivro
 {
@@ -23,5 +23,28 @@ class daoLivro
         }
         mysqli_close($conn->conectadb());
         return $msg;
+    }
+
+    public function listarLivrosDAO(){
+        $conn = new Conecta();
+        if ($conn->conectadb()) {
+            $sql = "select * from livro";
+            $query = mysqli_query($conn->conectadb(), $sql);
+            $result = mysqli_fetch_array($query);
+            $lista = array();
+            $a = 0;
+            do{
+                $livro = new Livro();
+                $livro->setIdLivro($result['idlivro']);
+                $livro->setTitulo($result['titulo']);
+                $livro->setAutor($result['autor']);
+                $livro->setEditora($result['editora']);
+                $livro->setQtdEstoque($result['qtdEstoque']);
+                $lista[$a] = $livro;
+                $a++;
+            }while($result = mysqli_fetch_array($query));
+            mysqli_close($conn->conectadb());
+            return $lista;
+        }
     }
 }
