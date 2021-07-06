@@ -116,20 +116,44 @@ include_once 'controller/ProdutoController.php';
                             <th scope="col">Compra (R$)</th>
                             <th scope="col">Venda (R$)</th>
                             <th scope="col">Estoque</th>
+                            <th scope="col text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $pcTable = new ProdutoController();
                         $listaProdutos = $pcTable->listarProdutos();
+                        
                         foreach ($listaProdutos as $lp) {
-                            print_r("<tr><td>" . $lp->getIdProduto() . "</td>");
+
+
+                           /* print_r("<tr><td>" . $lp->getIdProduto() . "</td>");
                             print_r("<td>" . $lp->getNomeProduto() . "</td>");
                             print_r("<td>" . $lp->getVlrCompra(). "</td>");
                             print_r("<td>" . $lp->getVlrVenda() . "</td>");
-                            print_r("<td>" . $lp->getQtdEstoque() . "</td></tr>");
-                        }
-                        ?>
+                            print_r("<td>" . $lp->getQtdEstoque() . "</td></tr>");*/
+                        
+                     
+                            ?>  
+                            <tr>
+                                <td><?php print_r($lp->getIdproduto());?></td>
+                                <td><?php print_r($lp->getNomeProduto());?></td>
+                                <td><?php print_r($lp->getVlrCompra());?></td>
+                                <td><?php print_r($lp->getVlrVenda());?></td>
+                                <td><?php print_r($lp->getQtdEstoque());?></td>
+                                <td><a class="btn btn-outline-dark" href="#">Editar</a>
+                                <a class="btn btn-outline-danger" href="#">Excluir</a>
+                                </td>
+                            </tr>    
+
+                            <?php    
+                         } 
+                         
+                        ?>          
+                                
+                                
+                        
+                        
                     </tbody>
                 </table>
             </div>
