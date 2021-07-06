@@ -1,3 +1,7 @@
+<?php
+include_once 'controller/ProdutoController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +11,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <style>
         .espaco {
@@ -61,7 +66,7 @@
 
     <div class="container-fluid ">
         <div class="row">
-            <div class="col-4 offset-4">
+            <div class="col-md-6 offset-md-3">
                 <div class="card-header bg-light text-center">
                     Cadastro de Produto
                 </div>
@@ -85,7 +90,7 @@
                         </div>
                     </form>
                     <?php
-                    include_once ('../php01/controller/ProdutoController.php');
+                    include_once('../php01/controller/ProdutoController.php');
                     //envio dos dados para o banco
                     if (isset($_POST['cadastrarProduto'])) {
                         $nomeProduto = $_POST['nomeProduto'];
@@ -103,6 +108,30 @@
                     }
                     ?>
                 </div>
+                <table class="table">
+                    <thead class="thead-light bg-dark text-white">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Compra (R$)</th>
+                            <th scope="col">Venda (R$)</th>
+                            <th scope="col">Estoque</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $pcTable = new ProdutoController();
+                        $listaProdutos = $pcTable->listarProdutos();
+                        foreach ($listaProdutos as $lp) {
+                            print_r("<tr><td>" . $lp->getIdProduto() . "</td>");
+                            print_r("<td>" . $lp->getNomeProduto() . "</td>");
+                            print_r("<td>" . $lp->getVlrCompra(). "</td>");
+                            print_r("<td>" . $lp->getVlrVenda() . "</td>");
+                            print_r("<td>" . $lp->getQtdEstoque() . "</td></tr>");
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
