@@ -30,6 +30,7 @@
             border-width: 0;
             text-align: center;
         }
+
     </style>
 </head>
 
@@ -120,8 +121,9 @@
         </div>
     </div>
 
+    <div class="container-fluid ">
     <div class="row">
-        <div class="col-8 offset-md-2">
+        <div class="col-md-8 offset-md-2">
             <table class="table">
                 <thead class="thead-light bg-dark text-white">
                     <tr>
@@ -164,7 +166,7 @@
 
         </div>
     </div>
-
+    </div>
 
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
