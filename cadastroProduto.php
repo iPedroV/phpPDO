@@ -123,9 +123,10 @@ include_once 'controller/ProdutoController.php';
                         <?php
                         $pcTable = new ProdutoController();
                         $listaProdutos = $pcTable->listarProdutos();
-                        
+                        $a = 0;
+                        if ($listaProdutos != null) {
                         foreach ($listaProdutos as $lp) {
-
+                            $a++;
 
                            /* print_r("<tr><td>" . $lp->getIdProduto() . "</td>");
                             print_r("<td>" . $lp->getNomeProduto() . "</td>");
@@ -141,14 +142,39 @@ include_once 'controller/ProdutoController.php';
                                 <td><?php print_r($lp->getVlrCompra());?></td>
                                 <td><?php print_r($lp->getVlrVenda());?></td>
                                 <td><?php print_r($lp->getQtdEstoque());?></td>
-                                <td><a class="btn btn-outline-dark" href="#">Editar</a>
-                                <a class="btn btn-outline-danger" href="#">Excluir</a>
+                                <td><a class="btn btn-light" 
+                                       href="#?id=<?php echo $lp->getIdProduto(); ?>">Editar</a>                                    
+                                    <button type="button" 
+                                            class="btn btn-light" data-bs-toggle="modal" 
+                                            data-bs-target="#exampleModal<?php echo $a;?>">
+                                    <a class="btn btn-light" 
+                                       href="#?id=<?php echo $lp->getIdProduto(); ?>">Excluir</a>                                    
+                                    <button type="button" 
+                                            class="btn btn-light" data-bs-toggle="modal" 
+                                            data-bs-target="#exampleModal<?php echo $a;?>">
+                                        
                                 </td>
                             </tr>    
-
+                            <div class="modal fade" id="exampleModal<?php echo $a;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Contexto....<?php echo $lp->getIdProduto(); ?>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Sim</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                             <?php    
-                         } 
-                         
+                            } 
+                        }
                         ?>          
                                 
                                 
