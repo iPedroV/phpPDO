@@ -15,6 +15,7 @@ class daoProduto
                 $p->getQtdEstoque() . "')";
             if (mysqli_query($conn->conectadb(), $sql)) {
                 $msg = "<p style='color:green'>  Dados cadastrados com sucesso </p>";
+                
             } else {
                 $msg = "<p> failed </p>";
             }

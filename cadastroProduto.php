@@ -23,6 +23,10 @@ include_once 'controller/ProdutoController.php';
             padding-left: 10px;
             padding-right: 10px;
         }
+
+        btn{
+            width: 32px;
+        }
     </style>
 </head>
 
@@ -99,6 +103,7 @@ include_once 'controller/ProdutoController.php';
                         $qtdEstoque = $_POST['qtdEstoque'];
 
                         $pc = new ProdutoController();
+                        
                         echo "<p>" . $pc->inserirProduto(
                             $nomeProduto,
                             $vlrCompra,
@@ -142,18 +147,14 @@ include_once 'controller/ProdutoController.php';
                                 <td><?php print_r($lp->getVlrCompra());?></td>
                                 <td><?php print_r($lp->getVlrVenda());?></td>
                                 <td><?php print_r($lp->getQtdEstoque());?></td>
-                                <td><a class="btn btn-light" 
-                                       href="#?id=<?php echo $lp->getIdProduto(); ?>">Editar</a>                                    
-                                    <button type="button" 
-                                            class="btn btn-light" data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal<?php echo $a;?>">
+                                <td>
                                     <a class="btn btn-light" 
-                                       href="#?id=<?php echo $lp->getIdProduto(); ?>">Excluir</a>                                    
-                                    <button type="button" 
-                                            class="btn btn-light" data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal<?php echo $a;?>">
-                                        
-                                </td>
+                                       href="#?id=<?php echo $lp->getIdProduto(); ?>">
+                                        <img src="img/editing.png" width="32"></a>
+                                    <a class="btn btn-light" data-bs-toggle="modal" 
+                                            data-bs-target="#exampleModal<?php echo $a;?>" href="#?id=<?php echo $lp->getIdProduto(); ?>">
+                                        <img src="img/trash.png" width="32"></a>
+                                    </td>
                             </tr>    
                             <div class="modal fade" id="exampleModal<?php echo $a;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

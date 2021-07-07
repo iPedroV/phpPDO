@@ -29,6 +29,7 @@
             border-style: solid;
             border-width: 0;
             text-align: center;
+            
         }
 
     </style>
@@ -98,7 +99,7 @@
                         </div>
                     </form>
                     <?php
-                    include_once('../projeto-php/controller/LivroController.php');
+                    include_once('../php01/controller/LivroController.php');
                     //envio dos dados para o banco
                     if (isset($_POST['cadastrarLivro'])) {
                         $titulo = $_POST['titulo'];
@@ -148,11 +149,38 @@
                             <td><?php print_r($li->getAutor()); ?></td>
                             <td><?php print_r($li->getEditora()); ?></td>
                             <td><?php print_r($li->getQtdEstoque()); ?></td>
-                            <td><a class="btn btn-outline-dark" href="#">Editar</a>
-                                <a class="btn btn-outline-danger" href="#">Excluir</a>
+                            <td><a class="btn btn-outline-dark" href="#?idlivro=<?php echo $lp->getIdLivro(); ?>"><button type="button" 
+                                            class="btn btn-light" data-bs-toggle="modal" 
+                                            data-bs-target="#exampleModal<?php echo $a;?>">
+                                <a class="btn btn-outline-danger" href="?idlivro">Excluir</a>
                             </td>
                         </tr>
-
+                        <td><a class="btn btn-light" 
+                                       href="#?id=<?php echo $lp->getIdLivro(); ?>">
+                                        
+                                    <button type="button" 
+                                            class="btn btn-light" data-bs-toggle="modal" 
+                                            data-bs-target="#exampleModal<?php echo $a;?>">
+                                        </td>
+                            </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal<?php echo $a;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Contexto....<?php echo $lp->getIdLivro(); ?>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Sim</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <?php
                     }
 

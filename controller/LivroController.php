@@ -1,6 +1,6 @@
 <?php
-include_once 'C:/xampp/htdocs/projeto-php/dao/daoLivro.php';
-include_once 'C:/xampp/htdocs/projeto-php/model/livro.php';
+include_once 'C:/xampp/htdocs/php01/dao/daoLivro.php';
+include_once 'C:/xampp/htdocs/php01/model/livro.php';
 
 class LivroController{
     public function inserirLivro($titulo, $autor, $editora, $qtdEstoque ){

@@ -5,7 +5,7 @@ class Conecta{
     
         private $url = "localhost:3306";
         private $user = "root";
-        private $password = "root";
+        private $password = "senac";
         private $base = "dblivro";
     
         public function conectadb(){

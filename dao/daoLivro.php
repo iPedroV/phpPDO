@@ -1,6 +1,6 @@
 <?php
-include_once 'C:/xampp/htdocs/projeto-php/bd/conectaCasa.php';
-include_once 'C:/xampp/htdocs/projeto-php/model/livro.php';
+include_once 'C:/xampp/htdocs/php01/bd/conectaCasa.php';
+include_once 'C:/xampp/htdocs/php01/model/livro.php';
 
 class daoLivro
 {
