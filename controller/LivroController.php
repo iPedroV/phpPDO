@@ -24,4 +24,18 @@ class LivroController{
         $daoLivro = new daoLivro();
         $daoLivro->excluirLivroDAO($id);
     }
+
+    public function pesquisarLivroID($id){
+        $daoLivro = new daoLivro();
+        return $daoLivro->pesquisarLivroDAO($id);
+    }
+
+    /*public function editaLivro($id){
+        $daoLivro = new daoLivro();
+        $daoLivro->editaLivroDAO($id);
+    }*/
+
+    public function limpar(){
+
+    }
 }

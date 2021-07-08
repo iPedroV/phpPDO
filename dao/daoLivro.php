@@ -59,8 +59,37 @@ class daoLivro
             exit;
         }else{
             echo "<script>alert('Banco inoperante!')</script>";
-            header("Location: ../cadastroLivro.php");
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"0;
+            URL='https://localhost/php01/cadastroLivro.php\">";
         }
 
+    }
+
+    public function pesquisarLivroDAO($id){
+        $conn = new Conecta();
+        $conecta = $conn->conectadb();
+        if($conecta){
+            $sql = "select * from livro where idlivro = '$id'";
+            $result = mysqli_query($conecta, $sql);
+            $linha = mysqli_fetch_assoc($result);
+            $livro = new Livro();
+            if($linha){
+                do {
+                    $livro->setIdLivro($linha['idlivro']);
+                    $livro->setTitulo($linha['titulo']);
+                    $livro->setAutor($linha['autor']);
+                    $livro->setEditora($linha['editora']);
+                    $livro->setQtdEstoque($linha['qtdEstoque']);
+                } while ($linha = mysqli_fetch_assoc($result));
+                mysqli_close($conecta);
+            }
+            
+        }else{
+            echo "<script>alert('Banco inoperante!')</script>";
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"0;
+            URL='https://localhost/php01/cadastroLivro.php\">";
+        }
+
+        return $livro;
     }
 }

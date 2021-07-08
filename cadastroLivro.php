@@ -84,7 +84,8 @@
                             <div class="col-md-6 offset-md-3">
                                 <label>Código</label><br>
                                 <label>Titulo</label>
-                                <input type="text" class="form-control" name="Titulo" required>
+                                <input type="text" class="form-control" name="Titulo"  required>
+                                <!-- COLOCAR O VALUE AI EM CIMA value="<?php echo $ll->getTitulo(); ?>"-->
                                 <label>Autor</label>
                                 <input type="text" class="form-control" name="Autor" required>
                                 <label>Editora</label>
@@ -93,7 +94,7 @@
                                 <input type="number" class="form-control" name="qtdEstoque" required>
                                 <input type="submit" name="cadastrarLivro" class="btn btn-success btInput" value="Enviar">
                                 &nbsp; &nbsp;
-                                <input type="reset" class="btn btn-danger btInput" value="Limpar">
+                                <input type="submit" name="limpar" class="btn btn-danger btInput" value="Limpar">
                             </div>
                         </div>
                     </form>
@@ -101,20 +102,25 @@
                     include_once('../php01/controller/LivroController.php');
                     //envio dos dados para o banco
                     if (isset($_POST['cadastrarLivro'])) {
-                        $titulo = $_POST['Titulo'];
-                        $autor = $_POST['Autor'];
-                        $editora = $_POST['Editora'];
-                        $qtdEstoque = $_POST['qtdEstoque'];
+                        $titulo = ($_POST['Titulo']);
+                        if ($titulo != "") {
+                            $autor = $_POST['Autor'];
+                            $editora = $_POST['Editora'];
+                            $qtdEstoque = $_POST['qtdEstoque'];
 
-                        $pc = new LivroController();
-
-                        echo "<p>" . $pc->inserirLivro(
-                            $titulo,
-                            $autor,
-                            $editora,
-                            $qtdEstoque
-                        ) . "</p>";
+                            $pc = new LivroController();
+                            unset($_POST['cadastrarLivro']);
+                            echo "<p>" . $pc->inserirLivro(
+                                $titulo,
+                                $autor,
+                                $editora,
+                                $qtdEstoque
+                            ) . "</p>";
+                            echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
+                                URL='cadastroLivro.php'\">";
+                        }
                     }
+                    
                     ?>
                 </div>
                 <table class="table">
@@ -152,7 +158,7 @@
                                     <td><?php print_r($ll->getEditora()); ?></td>
                                     <td><?php print_r($ll->getQtdEstoque()); ?></td>
                                     <td>
-                                        <a class="btn btn-outline-dark" href="#?id=<?php echo $ll->getIdLivro(); ?>">Editar</a>
+                                        <a class="btn btn-outline-dark" href="controller/editaLivro.php?php echo $ll->getIdLivro(); ?>">Editar</a>
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $a; ?>">Excluir</button>
                                     </td>
                                 </tr>
@@ -164,12 +170,11 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                            <form method="get" action="excluiLivro.php">
-                                            <label><strong>Deseja excluir o livro <?php echo $ll->getTitulo(); ?>?</strong></label>
-                                                <input type="hidden" name="ide"
-                                                    value="<?php echo $ll->getIdLivro(); ?>">
-                                                
-                                                
+                                                <form method="get" action="controller/excluiLivro.php">
+                                                    <label><strong>Deseja excluir o livro <?php echo $ll->getTitulo(); ?>?</strong></label>
+                                                    <input type="hidden" name="ide" value="<?php echo $ll->getIdLivro(); ?>">
+
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Sim</button>
