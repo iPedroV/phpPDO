@@ -29,9 +29,8 @@
             border-style: solid;
             border-width: 0;
             text-align: center;
-            
-        }
 
+        }
     </style>
 </head>
 
@@ -75,9 +74,9 @@
 
     <div class="container-fluid ">
         <div class="row">
-            <div class="col-4 offset-4">
+            <div class="col-md-6 offset-md-3">
                 <div class="card-header bg-light text-center">
-                    Cadastro de Produto
+                    Cadastro de Livro
                 </div>
                 <div class="card-body border">
                     <form method="post" action="">
@@ -85,12 +84,12 @@
                             <div class="col-md-6 offset-md-3">
                                 <label>Código</label><br>
                                 <label>Titulo</label>
-                                <input type="text" class="form-control" name="titulo" required>
+                                <input type="text" class="form-control" name="Titulo" required>
                                 <label>Autor</label>
-                                <input type="text" class="form-control" name="autor" required>
+                                <input type="text" class="form-control" name="Autor" required>
                                 <label>Editora</label>
-                                <input type="text" class="form-control" name="editora" required>
-                                <label>qtdEstoque</label>
+                                <input type="text" class="form-control" name="Editora" required>
+                                <label>Qtde de Estoque</label>
                                 <input type="number" class="form-control" name="qtdEstoque" required>
                                 <input type="submit" name="cadastrarLivro" class="btn btn-success btInput" value="Enviar">
                                 &nbsp; &nbsp;
@@ -102,12 +101,13 @@
                     include_once('../php01/controller/LivroController.php');
                     //envio dos dados para o banco
                     if (isset($_POST['cadastrarLivro'])) {
-                        $titulo = $_POST['titulo'];
-                        $autor = $_POST['autor'];
-                        $editora = $_POST['editora'];
+                        $titulo = $_POST['Titulo'];
+                        $autor = $_POST['Autor'];
+                        $editora = $_POST['Editora'];
                         $qtdEstoque = $_POST['qtdEstoque'];
 
                         $pc = new LivroController();
+
                         echo "<p>" . $pc->inserirLivro(
                             $titulo,
                             $autor,
@@ -117,83 +117,75 @@
                     }
                     ?>
                 </div>
+                <table class="table">
+                    <thead class="thead-light bg-dark text-white">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Editora</th>
+                            <th scope="col">Estoque</th>
+                            <th scope="col text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $lcTable = new LivroController();
+                        $listaLivros = $lcTable->listarLivros();
+                        $a = 0;
+                        if ($listaLivros != null) {
+                            foreach ($listaLivros as $ll) {
+                                $a++;
+
+                                /* print_r("<tr><td>" . $lp->getIdProduto() . "</td>");
+                            print_r("<td>" . $lp->getNomeProduto() . "</td>");
+                            print_r("<td>" . $lp->getVlrCompra(). "</td>");
+                            print_r("<td>" . $lp->getVlrVenda() . "</td>");
+                            print_r("<td>" . $lp->getQtdEstoque() . "</td></tr>");*/
+
+
+                        ?>
+                                <tr>
+                                    <td><?php print_r($ll->getIdLivro()); ?></td>
+                                    <td><?php print_r($ll->getTitulo()); ?></td>
+                                    <td><?php print_r($ll->getAutor()); ?></td>
+                                    <td><?php print_r($ll->getEditora()); ?></td>
+                                    <td><?php print_r($ll->getQtdEstoque()); ?></td>
+                                    <td>
+                                        <a class="btn btn-outline-dark" href="#?id=<?php echo $ll->getIdLivro(); ?>">Editar</a>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $a; ?>">Excluir</button>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="exampleModal<?php echo $a; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Contexto....<?php echo $ll->getIdLivro(); ?>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">Sim</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <?php
+                            }
+                        }
+                        ?>
+
+
+
+
+                    </tbody>
+                </table>
 
             </div>
         </div>
-    </div>
-
-    <div class="container-fluid ">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <table class="table">
-                <thead class="thead-light bg-dark text-white">
-                    <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Autor</th>
-                        <th scope="col">Editora</th>
-                        <th scope="col">Estoque</th>
-                        <th scope="col-md-6">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $pcTable = new LivroController();
-                    $listaLivros = $pcTable->listarLivros();
-
-                    foreach ($listaLivros as $li) {
-                    ?>
-                        <tr>
-                            <td><?php print_r($li->getIdLivro()); ?></td>
-                            <td><?php print_r($li->getTitulo()); ?></td>
-                            <td><?php print_r($li->getAutor()); ?></td>
-                            <td><?php print_r($li->getEditora()); ?></td>
-                            <td><?php print_r($li->getQtdEstoque()); ?></td>
-                            <td><a class="btn btn-outline-dark" href="#?idlivro=<?php echo $lp->getIdLivro(); ?>"><button type="button" 
-                                            class="btn btn-light" data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal<?php echo $a;?>">
-                                <a class="btn btn-outline-danger" href="?idlivro">Excluir</a>
-                            </td>
-                        </tr>
-                        <td><a class="btn btn-light" 
-                                       href="#?id=<?php echo $lp->getIdLivro(); ?>">
-                                        
-                                    <button type="button" 
-                                            class="btn btn-light" data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal<?php echo $a;?>">
-                                        </td>
-                            </tr>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal<?php echo $a;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Contexto....<?php echo $lp->getIdLivro(); ?>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Sim</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                    }
-
-                    ?>
-
-
-
-
-                </tbody>
-            </table>
-
-        </div>
-    </div>
     </div>
 
     <script src="js/bootstrap.js"></script>

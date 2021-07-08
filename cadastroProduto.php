@@ -24,9 +24,6 @@ include_once 'controller/ProdutoController.php';
             padding-right: 10px;
         }
 
-        btn{
-            width: 32px;
-        }
     </style>
 </head>
 
@@ -103,7 +100,7 @@ include_once 'controller/ProdutoController.php';
                         $qtdEstoque = $_POST['qtdEstoque'];
 
                         $pc = new ProdutoController();
-                        
+
                         echo "<p>" . $pc->inserirProduto(
                             $nomeProduto,
                             $vlrCompra,
@@ -130,53 +127,53 @@ include_once 'controller/ProdutoController.php';
                         $listaProdutos = $pcTable->listarProdutos();
                         $a = 0;
                         if ($listaProdutos != null) {
-                        foreach ($listaProdutos as $lp) {
-                            $a++;
+                            foreach ($listaProdutos as $lp) {
+                                $a++;
 
-                           /* print_r("<tr><td>" . $lp->getIdProduto() . "</td>");
+                                /* print_r("<tr><td>" . $lp->getIdProduto() . "</td>");
                             print_r("<td>" . $lp->getNomeProduto() . "</td>");
                             print_r("<td>" . $lp->getVlrCompra(). "</td>");
                             print_r("<td>" . $lp->getVlrVenda() . "</td>");
                             print_r("<td>" . $lp->getQtdEstoque() . "</td></tr>");*/
-                        
-                     
-                            ?>  
-                            <tr>
-                                <td><?php print_r($lp->getIdproduto());?></td>
-                                <td><?php print_r($lp->getNomeProduto());?></td>
-                                <td><?php print_r($lp->getVlrCompra());?></td>
-                                <td><?php print_r($lp->getVlrVenda());?></td>
-                                <td><?php print_r($lp->getQtdEstoque());?></td>
-                                <td>
-                                    <a class="btn btn-outline-dark" href="#?id=<?php echo $lp->getIdProduto(); ?>">Editar</a>
-                                   <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $a;?>">Excluir</button>
+
+
+                        ?>
+                                <tr>
+                                    <td><?php print_r($lp->getIdproduto()); ?></td>
+                                    <td><?php print_r($lp->getNomeProduto()); ?></td>
+                                    <td><?php print_r($lp->getVlrCompra()); ?></td>
+                                    <td><?php print_r($lp->getVlrVenda()); ?></td>
+                                    <td><?php print_r($lp->getQtdEstoque()); ?></td>
+                                    <td>
+                                        <a class="btn btn-outline-dark" href="#?id=<?php echo $lp->getIdProduto(); ?>">Editar</a>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $a; ?>">Excluir</button>
                                     </td>
-                            </tr>    
-                            <div class="modal fade" id="exampleModal<?php echo $a;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </tr>
+                                <div class="modal fade" id="exampleModal<?php echo $a; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Contexto....<?php echo $lp->getIdProduto(); ?>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">Sim</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    Contexto....<?php echo $lp->getIdProduto(); ?>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Sim</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                            <?php    
-                            } 
+                        <?php
+                            }
                         }
-                        ?>          
-                                
-                                
-                        
-                        
+                        ?>
+
+
+
+
                     </tbody>
                 </table>
             </div>
