@@ -148,12 +148,8 @@ include_once 'controller/ProdutoController.php';
                                 <td><?php print_r($lp->getVlrVenda());?></td>
                                 <td><?php print_r($lp->getQtdEstoque());?></td>
                                 <td>
-                                    <a class="btn btn-light" 
-                                       href="#?id=<?php echo $lp->getIdProduto(); ?>">
-                                        <img src="img/editing.png" width="32"></a>
-                                    <a class="btn btn-light" data-bs-toggle="modal" 
-                                            data-bs-target="#exampleModal<?php echo $a;?>" href="#?id=<?php echo $lp->getIdProduto(); ?>">
-                                        <img src="img/trash.png" width="32"></a>
+                                    <a class="btn btn-outline-dark" href="#?id=<?php echo $lp->getIdProduto(); ?>">Editar</a>
+                                   <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $a;?>">Excluir</button>
                                     </td>
                             </tr>    
                             <div class="modal fade" id="exampleModal<?php echo $a;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
