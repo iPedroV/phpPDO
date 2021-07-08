@@ -19,4 +19,9 @@ class LivroController{
         $daoLivro = new daoLivro();
         return $daoLivro->listarLivrosDAO();
     }
+
+    public function excluirLivro($id){
+        $daoLivro = new daoLivro();
+        $daoLivro->excluirLivroDAO($id);
+    }
 }

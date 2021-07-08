@@ -164,12 +164,18 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Contexto....<?php echo $ll->getIdLivro(); ?>
+                                            <form method="get" action="excluiLivro.php">
+                                            <label><strong>Deseja excluir o livro <?php echo $ll->getTitulo(); ?>?</strong></label>
+                                                <input type="hidden" name="ide"
+                                                    value="<?php echo $ll->getIdLivro(); ?>">
+                                                
+                                                
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">Sim</button>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                                <button type="submit" class="btn btn-primary">Sim</button>
+                                                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
