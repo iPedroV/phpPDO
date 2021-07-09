@@ -111,6 +111,8 @@ class daoLivro
             if($resp){
                 $msg = "<p style='color: blue;'>"
                         . "Dados atualizados com sucesso</p>";
+                        header("Location: cadastroLivro.php");
+                        
             }else{
                 $msg = $resp;
             }
