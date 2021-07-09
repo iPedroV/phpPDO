@@ -38,4 +38,17 @@ class LivroController{
     public function limpar(){
 
     }
+
+    public function atualizarLivro($id, $titulo, $autor, 
+            $editora, $qtdEstoque){
+        $livro = new Livro();
+        $livro->setIdLivro($id);
+        $livro->setTitulo($titulo);
+        $livro->setAutor($autor);
+        $livro->setEditora($editora);
+        $livro->setQtdEstoque($qtdEstoque);
+        
+        $daoLivro = new daoLivro();
+        return $daoLivro->atualizarLivroDAO($livro);
+    }
 }

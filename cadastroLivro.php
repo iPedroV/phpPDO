@@ -1,3 +1,10 @@
+<?php
+include_once 'controller/LivroController.php';
+include_once './model/livro.php';
+$pr = new Livro();
+$btEnviar = FALSE;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,25 +86,6 @@
                     Cadastro de Livro
                 </div>
                 <div class="card-body border">
-                    <form method="post" action="">
-                        <div class="row g-3">
-                            <div class="col-md-6 offset-md-3">
-                                <label>Código</label><br>
-                                <label>Titulo</label>
-                                <input type="text" class="form-control" name="Titulo"  required>
-                                <!-- COLOCAR O VALUE AI EM CIMA value="<?php echo $ll->getTitulo(); ?>"-->
-                                <label>Autor</label>
-                                <input type="text" class="form-control" name="Autor" required>
-                                <label>Editora</label>
-                                <input type="text" class="form-control" name="Editora" required>
-                                <label>Qtde de Estoque</label>
-                                <input type="number" class="form-control" name="qtdEstoque" required>
-                                <input type="submit" name="cadastrarLivro" class="btn btn-success btInput" value="Enviar">
-                                &nbsp; &nbsp;
-                                <input type="submit" name="limpar" class="btn btn-danger btInput" value="Limpar">
-                            </div>
-                        </div>
-                    </form>
                     <?php
                     include_once('../php01/controller/LivroController.php');
                     //envio dos dados para o banco
@@ -120,8 +108,74 @@
                                 URL='cadastroLivro.php'\">";
                         }
                     }
-                    
+
+                    //método para atualizar dados do produto no BD
+                    if (isset($_POST['atualizarLivro'])) {
+                        $titulo = trim($_POST['Titulo']);
+                        if ($titulo != "") {
+                            $id = $_POST['idlivro'];
+                            $autor = $_POST['Autor'];
+                            $editora = $_POST['Editora'];
+                            $qtdEstoque = $_POST['qtdEstoque'];
+
+                            $pc = new LivroController();
+                            unset($_POST['atualizarLivro']);
+                            echo $pc->atualizarLivro($id, $titulo, 
+                                    $autor, $editora, $qtdEstoque);
+                            echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
+                                URL='cadastroLivro.php'\">";
+                        }
+                    }
+
+                    if (isset($_POST['excluirLivro'])) {
+                        if ($pr != null) {
+                            $id = $_POST['idlivro']; 
+                            $lc = new LivroController();
+                            $lc->excluirLivro($id);
+                            #$id = $pr->getIdLivro();
+                        }
+                    }
+                    if (isset($_POST['limpar'])) {
+                        $pr = null;
+                        unset($_GET['id']);
+                        header("Location: cadastroLivro.php");
+                    }
+                    if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        $pc = new LivroController();
+                        $pr = $pc->pesquisarLivroID($id);
+                    }
                     ?>
+                    <form method="post" action="">
+                        <div class="row g-3">
+                            <div class="col-md-6 offset-md-3">
+                                <strong>Código: <label>
+                                        <?php
+                                        if ($pr != null) {
+                                            echo $pr->getIdLivro();
+                                        }
+                                        ?>
+                                    </label></strong>
+                                <input type="hidden" name="idlivro" value="<?php echo $pr->getIdLivro(); ?>">
+                                <br>
+                                <label>Titulo</label>
+                                <input type="text" class="form-control" name="Titulo" value="<?php echo $pr->getTitulo(); ?>" required>
+                                <!-- COLOCAR O VALUE AI EM CIMA value=""-->
+                                <label>Autor</label>
+                                <input type="text" class="form-control" name="Autor" value="<?php echo $pr->getAutor(); ?>" required>
+                                <label>Editora</label>
+                                <input type="text" class="form-control" name="Editora" value="<?php echo $pr->getEditora(); ?>" required>
+                                <label>Qtde de Estoque</label>
+                                <input type="number" class="form-control" name="qtdEstoque" value="<?php echo $pr->getQtdEstoque(); ?>" required>
+                                <input type="submit" name="cadastrarLivro" class="btn btn-success btInput" value="Enviar">
+                                <input type="submit" name="atualizarLivro" class="btn btn-light btInput" value="Atualizar">
+                                <input type="submit" name="excluirLivro" class="btn btn-warning btInput" value="Excluir">
+                                &nbsp; &nbsp;
+                                <input type="submit" name="limpar" class="btn btn-danger btInput" value="Limpar">
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
                 <table class="table">
                     <thead class="thead-light bg-dark text-white">
@@ -158,7 +212,7 @@
                                     <td><?php print_r($ll->getEditora()); ?></td>
                                     <td><?php print_r($ll->getQtdEstoque()); ?></td>
                                     <td>
-                                        <a class="btn btn-outline-dark" href="controller/editaLivro.php?php echo $ll->getIdLivro(); ?>">Editar</a>
+                                        <a class="btn btn-outline-dark" href="cadastroLivro.php?id=<?php echo $ll->getIdLivro(); ?>">Editar</a>
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $a; ?>">Excluir</button>
                                     </td>
                                 </tr>

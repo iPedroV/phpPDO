@@ -54,7 +54,7 @@ class daoLivro
         if($conecta){
             $sql = "delete from livro where idlivro = '$id'";
             mysqli_query($conecta, $sql);
-            header("Location: ../cadastroLivro.php");
+            header("Location: cadastroLivro.php");
             mysqli_close($conecta);
             exit;
         }else{
@@ -91,5 +91,33 @@ class daoLivro
         }
 
         return $livro;
+    }
+
+    //método para atualizar dados da tabela livro
+    public function atualizarLivroDAO(Livro $livro){
+        $conn = new Conecta();
+        if($conn->conectadb()){
+            $id = $livro->getIdLivro();
+            $titulo = $livro->getTitulo();
+            $autor = $livro->getAutor();
+            $editora = $livro->getEditora();
+            $qtdEstoque = $livro->getQtdEstoque();
+            $sql = "update livro set titulo = '$titulo',"
+                    . "autor = '$autor', editora = '$editora', "
+                    . "qtdEstoque = '$qtdEstoque' where idlivro = '$id'";
+            $resp = mysqli_query($conn->conectadb(), $sql) or 
+                    die($conn->conectadb());
+            if($resp){
+                $msg = "<p style='color: blue;'>"
+                        . "Dados atualizados com sucesso</p>";
+            }else{
+                $msg = $resp;
+            }
+        }else{
+            $msg = "<p style='color: red;'>"
+                        . "Erro na conexão com o banco de dados.</p>";
+        }
+        mysqli_close($conn->conectadb());
+        return $msg;
     }
 }
