@@ -10,7 +10,7 @@ $btEnviar = FALSE;
 
 <head>
     <meta charset="UTF-8">
-    <title>Teste</title>
+    <title>Cadas de Livros</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -123,7 +123,7 @@ $btEnviar = FALSE;
                             echo $pc->atualizarLivro($id, $titulo, 
                                     $autor, $editora, $qtdEstoque);
                             echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                URL='cadastroLivro.php'\">";
+                                URL='../cadastroLivro.php'\">";
                         }
                     }
 

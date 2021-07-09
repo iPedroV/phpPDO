@@ -54,7 +54,7 @@ class daoLivro
         if($conecta){
             $sql = "delete from livro where idlivro = '$id'";
             mysqli_query($conecta, $sql);
-            header("Location: cadastroLivro.php");
+            header("Location: ../cadastroLivro.php");
             mysqli_close($conecta);
             exit;
         }else{
@@ -64,6 +64,7 @@ class daoLivro
         }
 
     }
+
 
     public function pesquisarLivroDAO($id){
         $conn = new Conecta();
