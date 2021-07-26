@@ -1,9 +1,10 @@
 <?php
-require_once 'C:/xampp/htdocs/php01/dao/daoGenerico.php';
-require_once 'C:/xampp/htdocs/php01/model/pessoa.php';
+require_once "C:/xampp/htdocs/PHPMatutinoPDO/dao/daoPessoa.php";
+require_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Pessoa.php';
+class PessoController {
 
-class PessoaController{
-    public function inserirPessoa($nome, $dtNasc, $login, $senha, $perfil, $email, $cpf ){
+    public function inserirPessoa($nome, $dtNasc, $login, $senha, 
+            $perfil, $email, $cpf){
         $pessoa = new Pessoa();
         $pessoa->setNome($nome);
         $pessoa->setDtNasc($dtNasc);
@@ -12,8 +13,8 @@ class PessoaController{
         $pessoa->setPerfil($perfil);
         $pessoa->setEmail($email);
         $pessoa->setCpf($cpf);
-
-        $daoPessoa = new daoGenerico();
-        $daoPessoa->inserir($pessoa);
+                
+        $daoPessoa = new daoPessoa();
+        return $daoPessoa->inserir($pessoa);
     }
 }
