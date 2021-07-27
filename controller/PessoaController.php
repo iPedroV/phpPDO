@@ -1,7 +1,7 @@
 <?php
 require_once "C:/xampp/htdocs/PHPMatutinoPDO/dao/daoPessoa.php";
 require_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Pessoa.php';
-class PessoController {
+class PessoaController {
 
     public function inserirPessoa($nome, $dtNasc, $login, $senha, 
             $perfil, $email, $cpf){

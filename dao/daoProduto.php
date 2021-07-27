@@ -1,7 +1,7 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/bd/Conecta.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Produto.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Mensagem.php';
+include_once 'C:/xampp/htdocs/phpPDO/bd/Conecta.php';
+include_once 'C:/xampp/htdocs/phpPDO/model/Produto.php';
+include_once 'C:/xampp/htdocs/phpPDO/model/Mensagem.php';
 
 class DaoProduto {
 
@@ -74,6 +74,7 @@ class DaoProduto {
     
     //método para carregar lista de produtos do banco de dados
     public function listarProdutosDAO(){
+        $msg = new Mensagem();
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         if($conecta){
@@ -128,6 +129,7 @@ class DaoProduto {
     
     //método para os dados de produto por id
     public function pesquisarProdutoIdDAO($id){
+        $msg = new Mensagem();
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         $produto = new Produto();

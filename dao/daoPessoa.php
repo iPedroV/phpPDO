@@ -1,26 +1,48 @@
 <?php
 
-require_once 'C:/xampp/htdocs/PHPMatutinoPDO/bd/Conecta.php';
-require_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Pessoa.php';
+require_once 'C:/xampp/htdocs/phpPDO/bd/Conecta.php';
+require_once 'C:/xampp/htdocs/phpPDO/model/Pessoa.php';
 
 class daoPessoa {
 
     public $conn;
+                                                    ARRUMAR DPS
+    private $idpessoa;
+    private $nome;
+    private $dtNasc;
+    private $login;
+    private $senha;
+    private $perfil;
+    private $email;
+    private $cpf;
 
-    function inserir(Pessoa $p) {
-        $msg = "Dados cadastrados com sucesso!";
+    public function inserir(Pessoa $produto){
         $conn = new Conecta();
-        if ($conn->conectadb()) {
-            $sql = "insert into pessoa values (null,'" . $p->getNome() .
-                    "','" . $p->getDtNasc() . "','" . $p->getLogin() . "','" .
-                    $p->getSenha() . "','" . $p->getPerfil() . "','" .
-                    $p->getEmail() . "','" . $p->getCpf() . "')";
-            if(mysqli_query($conn->conectadb(), $sql) != 1){
-                $msg = "Erro de sintaxe. <br>";
+        $msg = new Mensagem();
+        $conecta = $conn->conectadb();
+        if($conecta){
+            $nomePessoa = $produto->getNome();
+            $vlrCompra = $produto->getVlrCompra();
+            $vlrVenda = $produto->getVlrVenda();
+            $qtdEstoque = $produto->getQtdEstoque();
+            try {
+                $stmt = $conecta->prepare("insert into produto values "
+                        . "(null,?,?,?,?)");
+                $stmt->bindParam(1, $nomePessoa);
+                $stmt->bindParam(2, $vlrCompra);
+                $stmt->bindParam(3, $vlrVenda);
+                $stmt->bindParam(4, $qtdEstoque);
+                $stmt->execute();
+                $msg->setMsg("<p style='color: green;'>"
+                        . "Dados Cadastrados com sucesso</p>");
+            } catch (Exception $ex) {
+                $msg->setMsg($ex);
             }
-        } else
-            $msg = "Erro na conexão com Banco de Dados!";
-        mysqli_close($conn->conectadb());
+        }else{
+            $msg->setMsg("<p style='color: red;'>"
+                        . "Erro na conexão com o banco de dados.</p>");
+        }
+        $conn = null;
         return $msg;
     }
 
