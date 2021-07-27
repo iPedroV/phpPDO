@@ -234,6 +234,8 @@ $btEnviar = FALSE;
                             <th scope="col text-center">Ações</th>
                             <th scope="col text-center">Ações</th>
                             <th scope="col text-center">Ações</th>
+                            <th scope="col text-center">Ações</th>
+                            
                             
                         </tr>
                     </thead>
