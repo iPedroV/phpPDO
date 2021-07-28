@@ -185,7 +185,8 @@ $btEnviar = FALSE;
                     if (isset($_POST['limpar'])) {
                         $pr = null;
                         unset($_GET['id']);
-                        header("Location: cadastroFornecedor.php");
+                        echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
+                                URL='cadastroFornecedor.php'\">";
                     }
                     if (isset($_GET['id'])) {
                         $id = $_GET['id'];
@@ -206,30 +207,30 @@ $btEnviar = FALSE;
                                 <input type="hidden" name="idfornecedor" value="<?php echo $pr->getIdFornecedor(); ?>">
                                 <br>
                                 <label>Nome do Fornecedor</label>
-                                <input type="text" class="form-control" name="nomeFornecedor" value="<?php echo $pr->getnomeFornecedor(); ?>" required>
+                                <input type="text" class="form-control" name="nomeFornecedor" value="<?php echo $pr->getnomeFornecedor(); ?>" >
                                 <!-- COLOCAR O VALUE AI EM CIMA value=""-->
                                 <label>Logradouro</label>
-                                <input type="text" class="form-control" name="Logradouro" value="<?php echo $pr->getLogradouro(); ?>" required>
+                                <input type="text" class="form-control" name="Logradouro" value="<?php echo $pr->getLogradouro(); ?>" >
                                 <label>Número</label>
-                                <input type="text" class="form-control" name="Numero" value="<?php echo $pr->getNumero(); ?>" required>
+                                <input type="text" class="form-control" name="Numero" value="<?php echo $pr->getNumero(); ?>" >
                                 <label>Complemento</label>
-                                <input type="text" class="form-control" name="Complemento" value="<?php echo $pr->getComplemento(); ?>" required>
+                                <input type="text" class="form-control" name="Complemento" value="<?php echo $pr->getComplemento(); ?>" >
                                 <label>Bairro</label>
-                                <input type="text" class="form-control" name="Bairro" value="<?php echo $pr->getBairro(); ?>" required>
+                                <input type="text" class="form-control" name="Bairro" value="<?php echo $pr->getBairro(); ?>" >
                                 <label>Cidade</label>
-                                <input type="text" class="form-control" name="Cidade" value="<?php echo $pr->getCidade(); ?>" required>
+                                <input type="text" class="form-control" name="Cidade" value="<?php echo $pr->getCidade(); ?>" >
                                 <label>UF</label>
-                                <input type="text" class="form-control" name="UF" value="<?php echo $pr->getUf(); ?>" required>
+                                <input type="text" class="form-control" name="UF" value="<?php echo $pr->getUf(); ?>" maxlength="2" >
                                 <label>CEP</label>
-                                <input type="text" class="form-control" name="CEP" value="<?php echo $pr->getCep(); ?>" required>
+                                <input type="text" class="form-control" name="CEP" value="<?php echo $pr->getCep(); ?>" >
                                 <label>Representante</label>
-                                <input type="text" class="form-control" name="Representante" value="<?php echo $pr->getRepresentante(); ?>" required>
+                                <input type="text" class="form-control" name="Representante" value="<?php echo $pr->getRepresentante(); ?>" >
                                 <label>E-mail</label>
-                                <input type="text" class="form-control" name="Email" value="<?php echo $pr->getEmail(); ?>" required>
+                                <input type="text" class="form-control" name="Email" value="<?php echo $pr->getEmail(); ?>" >
                                 <label>Telefone Fixo</label>
-                                <input type="text" class="form-control" name="TelFixo" value="<?php echo $pr->getTelFixo(); ?>" required>
+                                <input type="text" class="form-control" name="TelFixo" value="<?php echo $pr->getTelFixo(); ?>" >
                                 <label>Telefone Celular</label>
-                                <input type="text" class="form-control" name="TelCel" value="<?php echo $pr->getTelCel(); ?>" required>
+                                <input type="text" class="form-control" name="TelCel" value="<?php echo $pr->getTelCel(); ?>" >
                                 <input type="submit" name="cadastrarFornecedor" class="btn btn-success btInput" value="Enviar">
                                 <input type="submit" name="atualizarFornecedor" class="btn btn-light btInput" value="Atualizar">
                                 <input type="submit" name="excluirFornecedor" class="btn btn-warning btInput" value="Excluir">
