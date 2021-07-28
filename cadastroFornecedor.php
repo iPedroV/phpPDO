@@ -36,7 +36,13 @@ $btEnviar = FALSE;
             border-style: solid;
             border-width: 0;
             text-align: center;
+            
 
+        }
+
+        .table{
+
+            width: 50px;
         }
     </style>
 </head>
@@ -128,30 +134,45 @@ $btEnviar = FALSE;
 
                     //método para atualizar dados do produto no BD
                     if (isset($_POST['atualizarFornecedor'])) {
-                        $nomeFornecedor = trim($_POST['cadastrarFornecedor']);
+                        $nomeFornecedor = trim($_POST['nomeFornecedor']);
                         if ($nomeFornecedor != "") {
-                            $Logradouro = $_POST['Logradouro'];
-                            $Numero = $_POST['Numero'];
-                            $Complemento = $_POST['Complemento'];
-                            $Bairro = $_POST['Bairro'];
-                            $Cidade = $_POST['Cidade'];
-                            $Uf = $_POST['UF'];
-                            $Cep = $_POST['CEP'];
-                            $Representante = $_POST['Representante'];
-                            $Email = $_POST['Email'];
-                            $TelFixo = $_POST['TelFixo'];
-                            $TelCel = $_POST['TelCel'];
+                            $idfornecedor = $_POST['idfornecedor'];
+                            $logradouro = $_POST['Logradouro'];
+                            $numero = $_POST['Numero'];
+                            $complemento = $_POST['Complemento'];
+                            $bairro = $_POST['Bairro'];
+                            $cidade = $_POST['Cidade'];
+                            $uf = $_POST['UF'];
+                            $cep = $_POST['CEP'];
+                            $representante = $_POST['Representante'];
+                            $email = $_POST['Email'];
+                            $telFixo = $_POST['TelFixo'];
+                            $telCel = $_POST['TelCel'];
 
                             $pc = new FornecedorController();
                             unset($_POST['atualizarFornecedor']);
-                            $msg = $pc->atualizarFornecedor($id, $nomeFornecedor, $Logradouro, 
-                            $Numero, $Complemento, $Bairro, $Cidade, $Uf, $Cep, $Representante,
-                            $Email, $TelFixo, $TelCel);
+                            $msg = $pc->atualizarFornecedor($idfornecedor, $nomeFornecedor, $logradouro, 
+                            $numero, $complemento, $bairro, $cidade, $uf, $cep, $representante,
+                            $email, $telFixo, $telCel);
                             echo $msg->getMsg();
                             echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                URL='../cadastroFornecedor.php'\">";
+                                URL='cadastroFornecedor.php'\">";
                         }
                     }
+
+                    if (isset($_POST['Excluir'])) {
+                        if ($pr != null) {
+                            $id = $_POST['ide'];
+                            
+                            $fc = new FornecedorController();
+                            unset($_POST['Excluir']);
+                            $msg = $fc->excluirFornecedor($id);
+                            echo $msg->getMsg();
+                            echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
+                                URL='cadastroFornecedor.php'\">";
+                        }
+                    }
+
 
                     if (isset($_POST['excluirFornecedor'])) {
                         if ($pr != null) {
@@ -219,22 +240,29 @@ $btEnviar = FALSE;
                     </form>
 
                 </div>
-                <table class="table">
+
+
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
                     <thead class="thead-light bg-dark text-white">
                         <tr>
                             <th scope="col">ID Fornecedor</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Autor</th>
-                            <th scope="col">Editora</th>
-                            <th scope="col">Estoque</th>
-                            <th scope="col text-center">Ações</th>
-                            <th scope="col text-center">Ações</th>
-                            <th scope="col text-center">Ações</th>
-                            <th scope="col text-center">Ações</th>
-                            <th scope="col text-center">Ações</th>
-                            <th scope="col text-center">Ações</th>
-                            <th scope="col text-center">Ações</th>
-                            <th scope="col text-center">Ações</th>
+                            <th scope="col">Nome do Fornecedor</th>
+                            <th scope="col">Logradouro</th>
+                            <th scope="col">Número</th>
+                            <th scope="col">Complemento</th>
+                            <th scope="col">Bairro</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">UF</th>
+                            <th scope="col">CEP</th>
+                            <th scope="col">Representante</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Telefone Fixo</th>
+                            <th scope="col">Telefone Celular</th>
+                            <th scope="col">Ações</th>
                             
                             
                         </tr>
@@ -283,14 +311,14 @@ $btEnviar = FALSE;
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="get" action="controller/excluiFornecedor.php">
-                                                    <label><strong>Deseja excluir o fornecedor <?php echo $ll->getTitulo(); ?>?</strong></label>
+                                                <form method="post" action="">
+                                                    <label><strong>Deseja excluir o fornecedor <?php echo $ll->getNomeFornecedor(); ?>?</strong></label>
                                                     <input type="hidden" name="ide" value="<?php echo $ll->getIdFornecedor(); ?>">
 
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Sim</button>
+                                                <button type="submit" name="Excluir" class="btn btn-primary">Sim</button>
                                                 <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
                                             </div>
                                             </form>
@@ -307,11 +335,10 @@ $btEnviar = FALSE;
 
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
-
+ 
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

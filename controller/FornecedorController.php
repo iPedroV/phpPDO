@@ -26,23 +26,23 @@ class FornecedorController {
     }
     
     //método para atualizar dados de fornecedor no BD
-    public function atualizarFornecedor($id, $nomeFornecedor, $Logradouro, 
-    $Numero, $Complemento, $Bairro, $Cidade, $Uf, $Cep, $Representante,
-    $Email, $TelFixo, $TelCel){
+    public function atualizarFornecedor($idfornecedor, $nomeFornecedor, $logradouro, 
+    $numero, $complemento, $bairro, $cidade, $uf, $cep, $representante,
+    $email, $telFixo, $telCel){
         $fornecedor = new Fornecedor();
-        $fornecedor->setIdFornecedor($id);
+        $fornecedor->setIdFornecedor($idfornecedor);
         $fornecedor->setNomeFornecedor($nomeFornecedor);
-        $fornecedor->setLogradouro($Logradouro);
-        $fornecedor->setNumero($Numero);
-        $fornecedor->setComplemento($Complemento);
-        $fornecedor->setBairro($Bairro);
-        $fornecedor->setCidade($Cidade);
-        $fornecedor->setUf($Uf);
-        $fornecedor->setCep($Cep);
-        $fornecedor->setRepresentante($Representante);
-        $fornecedor->setEmail($Email);
-        $fornecedor->setTelFixo($TelFixo);
-        $fornecedor->setTelCel($TelCel);
+        $fornecedor->setLogradouro($logradouro);
+        $fornecedor->setNumero($numero);
+        $fornecedor->setComplemento($complemento);
+        $fornecedor->setBairro($bairro);
+        $fornecedor->setCidade($cidade);
+        $fornecedor->setUf($uf);
+        $fornecedor->setCep($cep);
+        $fornecedor->setRepresentante($representante);
+        $fornecedor->setEmail($email);
+        $fornecedor->setTelFixo($telFixo);
+        $fornecedor->setTelCel($telCel);
         
         $daoFornecedor = new DaoFornecedor();
         return $daoFornecedor->atualizarFornecedorDAO($fornecedor);
