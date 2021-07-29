@@ -5,12 +5,13 @@ include_once 'C:/xampp/htdocs/phpPDO/model/Produto.php';
 class ProdutoController {
     
     public function inserirProduto($nomeProduto, $vlrCompra, 
-            $vlrVenda, $qtdEstoque){
+            $vlrVenda, $qtdEstoque, $fkfornecedor){
         $produto = new Produto();
         $produto->setNomeProduto($nomeProduto);
         $produto->setVlrCompra($vlrCompra);
         $produto->setVlrVenda($vlrVenda);
         $produto->setQtdEstoque($qtdEstoque);
+        $produto->setFkFornecedor($fkfornecedor);
         
         $daoProduto = new DaoProduto();
         return $daoProduto->inserir($produto);
@@ -18,13 +19,15 @@ class ProdutoController {
     
     //método para atualizar dados de produto no BD
     public function atualizarProduto($id, $nomeProduto, $vlrCompra, 
-            $vlrVenda, $qtdEstoque){
+            $vlrVenda, $qtdEstoque, $fkFornecedor){
         $produto = new Produto();
         $produto->setIdProduto($id);
         $produto->setNomeProduto($nomeProduto);
         $produto->setVlrCompra($vlrCompra);
         $produto->setVlrVenda($vlrVenda);
         $produto->setQtdEstoque($qtdEstoque);
+        $produto->setFkFornecedor($fkFornecedor);
+        
         
         $daoProduto = new DaoProduto();
         return $daoProduto->atualizarProdutoDAO($produto);

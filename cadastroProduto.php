@@ -22,6 +22,9 @@ $btExcluir = FALSE;
             .pad15{
                 padding-bottom: 15px; padding-top: 15px;
             }
+            thead, tbody, tfoot, tr, td, th{
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -72,11 +75,12 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
+                                $fkfornecedor = $_POST['idfornecedor'];
 
                                 $pc = new ProdutoController();
                                 unset($_POST['cadastrarProduto']);
                                 $msg = $pc->inserirProduto($nomeProduto, $vlrCompra,
-                                        $vlrVenda, $qtdEstoque);
+                                        $vlrVenda, $qtdEstoque, $fkfornecedor);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroProduto.php'\">";
@@ -91,11 +95,12 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
+                                $fkFornecedor = $_POST['fkfornecedor'];
 
                                 $pc = new ProdutoController();
                                 unset($_POST['atualizarProduto']);
                                 $msg = $pc->atualizarProduto($id, $nomeProduto, 
-                                        $vlrCompra, $vlrVenda, $qtdEstoque);
+                                        $vlrCompra, $vlrVenda, $qtdEstoque, $fkFornecedor);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroProduto.php'\">";
@@ -132,7 +137,7 @@ $btExcluir = FALSE;
                             unset($_GET['id']);
                             header("Location: cadastroProduto.php");
                         }
-                        if (isset($_GET['id'])) {
+                        if (isset($_GET['id'])) { //é isso que faz preencher no formulário
                             $btEnviar = TRUE;
                             $btAtualizar = TRUE;
                             $btExcluir = TRUE;
@@ -168,6 +173,28 @@ $btExcluir = FALSE;
                                     <label>Qtde em Estoque</label>  
                                     <input class="form-control" type="number" 
                                            value="<?php echo $pr->getQtdEstoque(); ?>" name="qtdEstoque">
+                                    <label>Fornecedor</label>  
+                                    <select class="form-control"  name="fkfornecedor">
+                                        <option>[--SELECIONE--]</option>
+                                        <?php
+                                          include_once 'controller/FornecedorController.php';
+                                          $fcc = new FornecedorController();
+                                          $listaFornecedores = $fcc->listarFornecedores();
+                                          if($listaFornecedores != null){
+                                              foreach ($listaFornecedores as $lf){
+                                                  ?>
+                                            <option value="<?php echo $lf->getIdFornecedor();?>"
+                                            <?php
+                                                
+                                            if($lf->getIdFornecedor() == $pr->getFkFornecedor()->getIdFornecedor()){
+                                                echo "selected = 'selected'"; // APAGAR ESSE IF MALDITO
+                                            } ?>>
+                                                    <?php echo $lf->getNomeFornecedor();?></option>
+                                        <?php
+                                              }
+                                          }
+                                        ?>
+                                    </select>
                                     <input type="submit" name="cadastrarProduto"
                                            class="btn btn-success btInput" value="Enviar"
                                            <?php if($btEnviar == TRUE) echo "disabled"; ?>>
@@ -228,6 +255,7 @@ $btExcluir = FALSE;
                                     <th>Compra (R$)</th>
                                     <th>Venda (R$)</th>
                                     <th>Estoque</th>
+                                    <th>Representante</th>
                                     <th>Ações</th></tr>
                             </thead>
                             <tbody>
@@ -245,6 +273,7 @@ $btExcluir = FALSE;
                                             <td><?php print_r($lp->getVlrCompra()); ?></td>
                                             <td><?php print_r($lp->getVlrVenda()); ?></td>
                                             <td><?php print_r($lp->getQtdEstoque()); ?></td>
+                                            <td><?php print_r($lp->getFkFornecedor()->getNomeFornecedor()); ?></td>
                                             <td><a href="cadastroProduto.php?id=<?php echo $lp->getIdProduto(); ?>"
                                                    class="btn btn-light">
                                                     <img src="img/edita.png" width="32"></a>

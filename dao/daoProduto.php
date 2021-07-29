@@ -2,6 +2,7 @@
 include_once 'C:/xampp/htdocs/phpPDO/bd/Conecta.php';
 include_once 'C:/xampp/htdocs/phpPDO/model/Produto.php';
 include_once 'C:/xampp/htdocs/phpPDO/model/Mensagem.php';
+include_once 'C:/xampp/htdocs/phpPDO/model/Fornecedor.php';
 
 class DaoProduto {
 
@@ -14,13 +15,15 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
+            $fkFornecedor = $produto->getFkFornecedor();
             try {
                 $stmt = $conecta->prepare("insert into produto values "
-                        . "(null,?,?,?,?)");
+                        . "(null,?,?,?,?,?)");
                 $stmt->bindParam(1, $nomeProduto);
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
                 $stmt->bindParam(4, $qtdEstoque);
+                $stmt->bindParam(5, $fkFornecedor);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: green;'>"
                         . "Dados Cadastrados com sucesso</p>");
@@ -39,6 +42,7 @@ class DaoProduto {
     public function atualizarProdutoDAO(Produto $produto){
         $conn = new Conecta();
         $msg = new Mensagem();
+        
         $conecta = $conn->conectadb();
         if($conecta){
             $id = $produto->getIdProduto();
@@ -46,18 +50,21 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
+            $fkFornecedor = $produto->getFkFornecedor();
             try{
                 $stmt = $conecta->prepare("update produto set "
                         . "nome = ?,"
                         . "vlrCompra = ?,"
                         . "vlrVenda = ?, "
-                        . "qtdEstoque = ? "
+                        . "qtdEstoque = ?, "
+                        . "fkFornecedor = ? "
                         . "where id = ?");
                 $stmt->bindParam(1, $nomeProduto);
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
                 $stmt->bindParam(4, $qtdEstoque);
-                $stmt->bindParam(5, $id);
+                $stmt->bindParam(5, $fkFornecedor);
+                $stmt->bindParam(6, $id);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: blue;'>"
                         . "Dados atualizados com sucesso</p>");
@@ -79,7 +86,8 @@ class DaoProduto {
         $conecta = $conn->conectadb();
         if($conecta){
             try {
-                $rs = $conecta->query("select * from produto");
+                $rs = $conecta->query("SELECT * FROM produto inner join fornecedor "
+                . "on produto.fkFornecedor = fornecedor.idfornecedor");
                 $lista = array();
                 $a = 0;
                 if($rs->execute()){
@@ -91,6 +99,24 @@ class DaoProduto {
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
+                            
+                            $forn = new Fornecedor();
+                            $forn->setIdFornecedor($linha->idfornecedor);
+                            $forn->setNomeFornecedor($linha->nomeFornecedor);
+                            $forn->setLogradouro($linha->logradouro);
+                            $forn->setNumero($linha->numero);
+                            $forn->setComplemento($linha->complemento);
+                            $forn->setBairro($linha->bairro);
+                            $forn->setCidade($linha->cidade);
+                            $forn->setUf($linha->uf);
+                            $forn->setCep($linha->cep);
+                            $forn->setRepresentante($linha->representante);
+                            $forn->setEmail($linha->email);
+                            $forn->setTelCel($linha->telFixo);
+                            $forn->setTelFixo($linha->telCel);
+
+                            $produto->setFkFornecedor($forn);
+
                             $lista[$a] = $produto;
                             $a++;
                         }
@@ -135,8 +161,8 @@ class DaoProduto {
         $produto = new Produto();
         if($conecta){
             try {
-                $rs = $conecta->prepare("select * from produto where "
-                        . "id = ?");
+                $rs = $conecta->prepare("SELECT * FROM produto inner join fornecedor "
+                . "on produto.fkFornecedor = fornecedor.idfornecedor ");
                 $rs->bindParam(1, $id);
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
@@ -146,6 +172,23 @@ class DaoProduto {
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
+
+                            $forn = new Fornecedor();
+                            $forn->setIdFornecedor($linha->idfornecedor);
+                            $forn->setNomeFornecedor($linha->nomeFornecedor);
+                            $forn->setLogradouro($linha->logradouro);
+                            $forn->setNumero($linha->numero);
+                            $forn->setComplemento($linha->complemento);
+                            $forn->setBairro($linha->bairro);
+                            $forn->setCidade($linha->cidade);
+                            $forn->setUf($linha->uf);
+                            $forn->setCep($linha->cep);
+                            $forn->setRepresentante($linha->representante);
+                            $forn->setEmail($linha->email);
+                            $forn->setTelCel($linha->telFixo);
+                            $forn->setTelFixo($linha->telCel);
+                            
+                            $produto->setFkFornecedor($forn);
                         }
                     }
                 }

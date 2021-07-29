@@ -7,6 +7,9 @@ class Produto {
     private $vlrCompra;
     private $vlrVenda;
     private $qtdEstoque;
+    private $fkFornecedor;
+
+    
     
     function getIdProduto() {
         return $this->idProduto;
@@ -46,5 +49,25 @@ class Produto {
 
     function setQtdEstoque($qtdEstoque) {
         $this->qtdEstoque = $qtdEstoque;
+    }
+
+    /**
+     * Get the value of fkFornecedor
+     */ 
+    public function getFkFornecedor()
+    {
+        return $this->fkFornecedor;
+    }
+
+    /**
+     * Set the value of fkFornecedor
+     *
+     * @return  self
+     */ 
+    public function setFkFornecedor($fkFornecedor)
+    {
+        $this->fkFornecedor = $fkFornecedor;
+
+        return $this;
     }
 }
