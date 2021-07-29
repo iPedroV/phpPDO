@@ -186,8 +186,12 @@ $btExcluir = FALSE;
                                             <option value="<?php echo $lf->getIdFornecedor();?>"
                                             <?php
                                                 
-                                            if($lf->getIdFornecedor() == $pr->getFkFornecedor()->getIdFornecedor()){
-                                                echo "selected = 'selected'"; // APAGAR ESSE IF MALDITO
+                                            if($pr != null){
+                                                if($lf->getIdFornecedor() == $pr->getFkFornecedor()->getIdFornecedor()){
+                                                    echo "selected = 'selected'";
+                                                    
+                                                }
+                                            
                                             } ?>>
                                                     <?php echo $lf->getNomeFornecedor();?></option>
                                         <?php
