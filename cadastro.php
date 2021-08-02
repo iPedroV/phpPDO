@@ -1,3 +1,10 @@
+<?php
+include_once 'controller/PessoaController.php';
+include_once './model/Pessoa.php';
+$pe = new Pessoa();
+$btEnviar = FALSE;
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -58,7 +65,8 @@
                 <?php
                 //envio dos dados para o BD
                 if (isset($_POST['cadastrar'])) {
-                    include_once 'controller/PessoaController.php';
+                    $nome = trim($_POST['nome']);
+                    if ($nome != ""){
                     $nome = $_POST['nome'];
                     $dtNasc = $_POST['dtNasc'];
                     $login = $_POST['login'];
@@ -66,18 +74,35 @@
                     $perfil = $_POST['perfil'];
                     $cpf = $_POST['cpf'];
                     $email = $_POST['email'];
+                    $cep = $_POST['cep'];
+                    $logradouro = $_POST['logradouro'];
+                    $complemento = $_POST['complemento'];
+                    $bairro = $_POST['bairro'];
+                    $cidade = $_POST['cidade'];
+                    $uf = $_POST['uf'];
 
                     $pc = new PessoaController();
-                    echo "<p>" . $pc->inserirPessoa(
+                    unset($_POST['cadastrar']);
+                    $msg = $pc->inserirPessoa(
                         $nome,
                         $dtNasc,
                         $login,
                         $senha,
                         $perfil,
                         $email,
-                        $cpf
-                    ) . "</p>";
+                        $cpf, 
+                        $cep, 
+                        $logradouro , 
+                        $complemento , 
+                        $bairro, 
+                        $cidade, 
+                        $uf
+                    );
+                    echo $msg->getMsg();
+                            echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
+                                URL='cadastro.php'\">";
                 }
+            }
                 ?>
                 <div class="card-body border">
                     <form method="post" action="">

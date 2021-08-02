@@ -4,13 +4,13 @@ include_once 'C:/xampp/htdocs/phpPDO/model/Fornecedor.php';
 
 class FornecedorController {
     
-    public function inserirFornecedor($nomeFornecedor, $Logradouro, 
-            $Numero, $Complemento, $Bairro, $Cidade, $Uf, $Cep, $Representante,
+    public function inserirFornecedor($nomeFornecedor, $Logradouro,
+    $Complemento, $Bairro, $Cidade, $Uf, $Cep, $Representante,
             $Email, $TelFixo, $TelCel){
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomeFornecedor);
         $fornecedor->setLogradouro($Logradouro);
-        $fornecedor->setNumero($Numero);
+
         $fornecedor->setComplemento($Complemento);
         $fornecedor->setBairro($Bairro);
         $fornecedor->setCidade($Cidade);
@@ -27,13 +27,13 @@ class FornecedorController {
     
     //método para atualizar dados de fornecedor no BD
     public function atualizarFornecedor($idfornecedor, $nomeFornecedor, $logradouro, 
-    $numero, $complemento, $bairro, $cidade, $uf, $cep, $representante,
+    $complemento, $bairro, $cidade, $uf, $cep, $representante,
     $email, $telFixo, $telCel){
         $fornecedor = new Fornecedor();
         $fornecedor->setIdFornecedor($idfornecedor);
         $fornecedor->setNomeFornecedor($nomeFornecedor);
         $fornecedor->setLogradouro($logradouro);
-        $fornecedor->setNumero($numero);
+
         $fornecedor->setComplemento($complemento);
         $fornecedor->setBairro($bairro);
         $fornecedor->setCidade($cidade);

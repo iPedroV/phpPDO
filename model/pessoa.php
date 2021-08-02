@@ -2,7 +2,7 @@
 
 class Pessoa {
     
-    private $idpessoa;
+    private $idPessoa;
     private $nome;
     private $dtNasc;
     private $login;
@@ -11,8 +11,9 @@ class Pessoa {
     private $email;
     private $cpf;
     
-    function getIdpessoa() {
-        return $this->idpessoa;
+    public function getIdPessoa()
+    {
+        return $this->idPessoa;
     }
 
     function getNome() {
@@ -43,8 +44,10 @@ class Pessoa {
         return $this->cpf;
     }
 
-    function setIdpessoa($idpessoa) {
-        $this->idpessoa = $idpessoa;
+
+    function setIdPessoa($idPessoa)
+    {
+        $this->idPessoa = $idPessoa; 
     }
 
     function setNome($nome) {
@@ -74,5 +77,17 @@ class Pessoa {
     function setCpf($cpf) {
         $this->cpf = $cpf;
     }
+
+
+    /**
+     * Get the value of idPessoa
+     */ 
+    
+
+    /**
+     * Set the value of idPessoa
+     *
+     * @return  self
+     */ 
 
 }

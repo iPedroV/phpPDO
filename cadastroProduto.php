@@ -1,9 +1,14 @@
 <?php
+include_once 'controller/FornecedorController.php';
 include_once 'controller/ProdutoController.php';
 include_once './model/Produto.php';
 include_once './model/Mensagem.php';
+include_once './model/Fornecedor.php';
 $msg = new Mensagem();
 $pr = new Produto();
+$fcc = new FornecedorController();
+$fornecedor = new Fornecedor();
+$pr->setFkFornecedor($fornecedor);
 $btEnviar = FALSE;
 $btAtualizar = FALSE;
 $btExcluir = FALSE;
@@ -75,7 +80,7 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $fkfornecedor = $_POST['idfornecedor'];
+                                $fkfornecedor = $_POST['fkfornecedor'];
 
                                 $pc = new ProdutoController();
                                 unset($_POST['cadastrarProduto']);
@@ -104,6 +109,7 @@ $btExcluir = FALSE;
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroProduto.php'\">";
+                                    
                             }
                         }
                         
@@ -174,11 +180,11 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="number" 
                                            value="<?php echo $pr->getQtdEstoque(); ?>" name="qtdEstoque">
                                     <label>Fornecedor</label>  
-                                    <select class="form-control"  name="fkfornecedor">
-                                        <option>[--SELECIONE--]</option>
+                                    <select class="form-select"  name="fkfornecedor">
+                                        <option hidden>[--SELECIONE--]</option>
                                         <?php
-                                          include_once 'controller/FornecedorController.php';
-                                          $fcc = new FornecedorController();
+                                          
+                                          
                                           $listaFornecedores = $fcc->listarFornecedores();
                                           if($listaFornecedores != null){
                                               foreach ($listaFornecedores as $lf){
@@ -186,13 +192,13 @@ $btExcluir = FALSE;
                                             <option value="<?php echo $lf->getIdFornecedor();?>"
                                             <?php
                                                 
-                                            if($pr != null){
-                                                if($lf->getIdFornecedor() == $pr->getFkFornecedor()->getIdFornecedor()){
-                                                    echo "selected = 'selected'";
-                                                    
-                                                }
-                                            
-                                            } ?>>
+                                                $fk = $pr->getFkFornecedor()->getIdFornecedor();
+                                                if($pr->getFkFornecedor()->getIdFornecedor() != ""){
+                                                    if($lf->getidFornecedor() ==
+                                                    $pr->getFkFornecedor()->getIdfornecedor()){
+                                                        echo "selected = 'selected'";
+                                                    }
+                                                }?>>
                                                     <?php echo $lf->getNomeFornecedor();?></option>
                                         <?php
                                               }
