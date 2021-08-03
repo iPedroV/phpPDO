@@ -15,6 +15,7 @@ class Fornecedor {
     private $email;
     private $telFixo;
     private $telCel;
+    private $fkEndereco;
     
     
 
@@ -254,6 +255,26 @@ class Fornecedor {
     public function setTelCel($telCel)
     {
         $this->telCel = $telCel;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of fkEndereco
+     */ 
+    public function getFkEndereco()
+    {
+        return $this->fkEndereco;
+    }
+
+    /**
+     * Set the value of fkEndereco
+     *
+     * @return  self
+     */ 
+    public function setFkEndereco($fkEndereco)
+    {
+        $this->fkEndereco = $fkEndereco;
 
         return $this;
     }

@@ -42,6 +42,18 @@ class daoPessoa {
                     $stmt->bindParam(7, $cpf);
                     $stmt->execute();
                     
+                    $st = $conecta->prepare("select idendereco "
+                        . "from endereco where cep = ? and "
+                        . "logradouro = ? limit 1");
+                    $st->bindParam(1, $cep);
+                    $st->bindParam(2, $logradouro);
+                    $linhaEndereco = $st->execute();
+                    if($linhaEndereco){
+
+                    }
+
+                    
+
                     $stmt = $conecta->prepare("insert into endereco values "
                             . "(null,?,?,?,?,?,?)");
 

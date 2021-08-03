@@ -1,7 +1,11 @@
 <?php
 include_once 'controller/PessoaController.php';
 include_once './model/Pessoa.php';
+include_once './model/Endereco.php';
+include_once './model/Mensagem.php';
 $pe = new Pessoa();
+$en = new Endereco();
+$msg = new Mensagem();
 $btEnviar = FALSE;
 ?>
 
