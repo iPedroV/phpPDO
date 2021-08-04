@@ -50,6 +50,7 @@ class daoPessoa
                     } else {
                         $st2 = $conecta->prepare("insert into "
                             . "endereco values (null,?,?,?,?,?,?)");
+                            //TEM QUE ESTAR NA MESMA ORDEM DO BANCO DE DADOS
                         $st2->bindParam(1, $cep);
                         $st2->bindParam(2, $logradouro);
                         $st2->bindParam(3, $uf);
