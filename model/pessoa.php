@@ -12,7 +12,8 @@ class Pessoa {
     private $cpf;
     private $fkEndereco;
     
-    public function getIdPessoa()
+    
+    function getIdPessoa()
     {
         return $this->idPessoa;
     }
@@ -45,7 +46,7 @@ class Pessoa {
         return $this->cpf;
     }
 
-    public function getFkEndereco()
+    function getFkEndereco()
     {
         return $this->fkEndereco;
     }

@@ -236,7 +236,7 @@ $btEnviar = FALSE;
                                 <label>E-mail</label>
                                 <input type="text" class="form-control" name="Email" value="<?php echo $pr->getEmail(); ?>" >
                                 <label>Telefone Fixo</label>
-                                <input type="text" class="form-control" name="TelFixo" onkeypress="mascara(this, '## #####-####')" maxlength="13" value="<?php echo $pr->getTelFixo(); ?>" >
+                                <input type="text" class="form-control" name="TelFixo" onkeypress="mascara(this, '## ####-####')" maxlength="12" value="<?php echo $pr->getTelFixo(); ?>" >
                                 <label>Telefone Celular</label>
                                 <input type="text" class="form-control" name="TelCel" onkeypress="mascara(this, '## #####-####')" maxlength="13" value="<?php echo $pr->getTelCel(); ?>" >
                                 <input type="submit" name="cadastrarFornecedor" class="btn btn-success btInput" value="Enviar">

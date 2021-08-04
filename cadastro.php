@@ -6,6 +6,7 @@ include_once './model/Mensagem.php';
 $pe = new Pessoa();
 $en = new Endereco();
 $msg = new Mensagem();
+$pe->setFkEndereco($en);
 $btEnviar = FALSE;
 ?>
 
@@ -24,6 +25,17 @@ $btEnviar = FALSE;
             margin-bottom: 20px;
         }
     </style>
+    <script>
+            function mascara(t, mask){
+                var i = t.value.length;
+                var saida = mask.substring(1,0);
+                var texto = mask.substring(i)
+                
+                if (texto.substring(0,1) != saida){
+                    t.value += texto.substring(0,1);
+                }
+            }
+        </script>
 </head>
 
 <body>
@@ -71,6 +83,7 @@ $btEnviar = FALSE;
                 if (isset($_POST['cadastrar'])) {
                     $nome = trim($_POST['nome']);
                     if ($nome != ""){
+                    $idpessoa = $_POST['idpessoa'];
                     $nome = $_POST['nome'];
                     $dtNasc = $_POST['dtNasc'];
                     $login = $_POST['login'];
@@ -112,29 +125,39 @@ $btEnviar = FALSE;
                     <form method="post" action="">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Código: </label> <br>
+                            <strong>Código: <label style="color:red;">
+                                            <?php
+                                            if ($pe != null) {
+                                                echo $pe->getIdPessoa();
+                                                ?>
+                                            </label></strong>
+                                        <input type="hidden" name="idpessoa" 
+                                               value="<?php echo $pe->getIdPessoa() ?>"><br>
+                                               <?php
+                                           }
+                                           ?>     
                                 <label>Nome Completo</label>
-                                <input class="form-control" type="text" name="nome">
+                                <input class="form-control" type="text" name="nome" value="<?php echo $pe->getNome(); ?>">
                                 <label>Data de Nascimento</label>
-                                <input class="form-control" type="date" name="dtNasc">
+                                <input class="form-control" type="date" name="dtNasc" value="<?php echo $pe->getDtNasc(); ?>">
                                 <label>E-Mail</label>
-                                <input class="form-control" type="email" name="email">
+                                <input class="form-control" type="email" name="email" value="<?php echo $pe->getEmail(); ?>">
                                 <label>CPF</label>
-                                <input class="form-control" type="text" name="cpf">
+                                <input class="form-control" type="text" name="cpf" value="<?php echo $pe->getCpf(); ?>">
                             </div>
                             <div class="col-md-6">
                                 <br>
                                 <label>Login</label>
-                                <input class="form-control" type="text" name="login">
+                                <input class="form-control" type="text" name="login" value="<?php echo $pe->getLogin(); ?>">
                                 <label>Senha</label>
-                                <input class="form-control" type="password" name="senha">
+                                <input class="form-control" type="password" name="senha" value="<?php echo $pe->getSenha(); ?>">
                                 <label>Conf. Senha</label>
                                 <input class="form-control" type="password" name="senha2">
                                 <label>Perfil</label>
-                                <select name="perfil" class="form-control">
+                                <select name="perfil" class="form-select">
                                     <option>[--Selecione--]</option>
-                                    <option>Cliente</option>
-                                    <option>Funcionário</option>
+                                    <option value="<?php echo $pe->getPerfil();?>">Cliente</option>
+                                    <option value="<?php echo $pe->getPerfil();?>">Funcionário</option>
                                 </select>
                             </div>
                         </div>
@@ -150,19 +173,19 @@ $btEnviar = FALSE;
                                 
                                     <div class="col-md-6 ">
                                         <label>CEP</label><br>
-                                        <input class="form-control" type="text" name="cep">
+                                        <input class="form-control" type="text" id="cep" onkeypress="mascara(this, '#####-###')" maxlength="9" value="<?php echo $pe->getFkEndereco()->getCep(); ?>" name="cep">
                                         <label>Logradouro</label>
-                                        <input class="form-control" type="text" name="logradouro">
+                                        <input type="text" class="form-control" name="logradouro" id="rua" value="<?php echo $pe->getFkEndereco()->getLogradouro(); ?>" >
                                         <label>Complemento</label>
-                                        <input class="form-control" type="text" name="complemento">
+                                        <input type="text" class="form-control" name="complemento" id="complemento" <?php echo $pe->getFkEndereco()->getComplemento(); ?>" >
                                     </div>
                                     <div class="col-md-6">
                                         <label>Bairro</label>
-                                        <input class="form-control" type="text" name="bairro">
+                                        <input type="text" class="form-control" name="bairro" id="bairro" value="<?php echo $pe->getFkEndereco()->getBairro(); ?>" >
                                         <label>Cidade</label>
-                                        <input class="form-control" type="text" name="cidade">
+                                        <input type="text" class="form-control" name="cidade" id="cidade" value="<?php echo $pe->getFkEndereco()->getCidade(); ?>" >
                                         <label>UF</label>
-                                        <input class="form-control" type="text" name="uf">
+                                        <input type="text" class="form-control" name="uf" id="uf" value="<?php echo $pe->getFkEndereco()->getUf(); ?>" maxlength="2" >
                                     </div>
                                 </div>
                             </div>
@@ -180,6 +203,103 @@ $btEnviar = FALSE;
     </div>
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
+    <script src="js/JQuery.js"></script>
+    <script src="js/JQuery.min.js"></script>
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function() {
+            myInput.focus()
+        })
+    </script>
+    <!-- Adicionando Javascript controle de endereço via cep-->
+    <script>
+        $(document).ready(function() {
+
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#rua").val("");
+                $("#bairro").val("");
+                $("#cidade").val("");
+                $("#uf").val("");
+                $("#cepErro").val("");
+            }
+
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if (validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#rua").val("...");
+                        $("#bairro").val("...");
+                        $("#cidade").val("...");
+                        $("#uf").val("...");
+
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#rua").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                $("#cidade").val(dados.localidade);
+                                $("#uf").val(dados.uf);
+
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'CEP não encontrado'
+                                })
+
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'CEP Inválido'
+
+                        })
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css"> 
 </body>
 
 </html>

@@ -180,7 +180,7 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="number" 
                                            value="<?php echo $pr->getQtdEstoque(); ?>" name="qtdEstoque">
                                     <label>Fornecedor</label>  
-                                    <select class="form-select"  name="fkfornecedor">
+                                    <select class="form-select"  name="fkfornecedor" >
                                         <option hidden>[--SELECIONE--]</option>
                                         <?php
                                           
