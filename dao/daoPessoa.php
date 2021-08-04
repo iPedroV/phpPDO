@@ -57,10 +57,6 @@ class daoPessoa
                         $st2->bindParam(4, $bairro);
                         $st2->bindParam(5, $cidade);
                         $st2->bindParam(6, $complemento);
-                        
-                        
-                        
-                        
                         $st2->execute();
 
                         $st3 = $conecta->prepare("select idEndereco "
