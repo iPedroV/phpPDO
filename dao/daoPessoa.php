@@ -249,17 +249,15 @@ class daoPessoa
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         $pessoa = new Pessoa();
+        $endereco = new Endereco();
         if($conecta){
             try {
-                
-                $msg->setMsg("<p style='color: green;'>"
-                    . "Dados Cadastrados com sucesso</p>");
                 $rs = $conecta->prepare("SELECT * FROM pessoa inner join endereco "
                 . "on pessoa.fkEndereco = endereco.idEndereco where pessoa.idpessoa = ? limit 1");
                 $rs->bindParam(1, $id);
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
-                        $endereco = new Endereco();
+                       
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
                             $pessoa->setIdPessoa($linha->idpessoa);
                             $pessoa->setNome($linha->nome);
@@ -318,5 +316,40 @@ class daoPessoa
         $conn = null;
         return $msg;
 
+    }
+    public function procurarsenha($login, $senha)
+    {
+       
+        $conn = new Conecta();
+        $conecta = $conn->conectadb();
+        $check = null;
+        echo $senha;
+        if ($conecta) {
+            try {
+                $st = $conecta->prepare("SELECT idpessoa FROM pessoa where " . "login = ? and senha = ? ");
+                $st->bindParam(1, $login);
+                $st->bindParam(2, $senha);
+                if ($st->execute()) {
+
+                    if ($st->rowCount() > 0) {
+                        echo $st->rowCount();
+                        $check =  true;
+                    } else {
+                        $check =  false;
+                    }
+                }else{
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"5;
+                URL='login.php'\">";
+                }
+            } catch (Exception $ex) {
+                echo $ex;
+            }
+            return $check;
+            $conn = null;
+        } else {
+
+
+            echo "Sem conexão com o banco";
+        }
     }
 }

@@ -1,0 +1,166 @@
+@import url('https://font.giigkeapis.com/css?family=Poppins:200,300,400,500,700,800,900&display=swap');
+
+
+*
+{
+	font-family: 'Poppins', sans-serif;
+    
+    scroll-behavior: smooth;
+	background-color:transparent;
+
+}
+
+
+
+::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background: linear-gradient(to top, #0c0b0b,#013cff); 
+}
+
+::-webkit-scrollbar
+{
+	width: 6px;
+	
+}
+
+::-webkit-scrollbar-thumb
+{
+	background: linear-gradient(to top, #0a0a0a,#0a0a08);
+}
+
+
+
+p
+{
+	font-weight: 300;
+	color: #111;
+}
+
+/*HEADER e página inicial*/
+
+
+
+
+
+.banner
+{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(/img/LOL2.png);
+    
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: initial;
+	background-size: cover;
+    /*ideal: padding-left 108px*/ 
+    background-color:transparent;
+    
+}
+
+button
+{	
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+  	background-color: #013cff;
+  	border: 1px bold;
+  	color: #FFFFFF;
+  	font-size: 28px;
+  	
+  	width: 190px;
+  	transition: all 0.5s;
+  	cursor: pointer;
+	
+	border-radius: 50px;
+	
+	transform: scale(1);
+  	
+    animation: colorir 2.5s infinite;
+    
+}
+
+button:hover
+{
+	margin-right: 20px;
+   
+    transition:  10.5s;	
+}
+
+@keyframes colorir{
+    0%{
+        background: #013cff;
+        transform: scale(0.95);
+    }
+    70%{
+        background: #0178ff;
+        transform: scale(1);
+    }
+    100%{
+        background: #013cff; 
+        transform: scale(0.95);
+    }
+}
+
+.button span {
+  	cursor: pointer;
+  	display: inline-block;
+  	position: relative;
+  	transition: 0.5s;
+	
+}
+
+
+
+.logo2{
+	
+    width: 122px;
+    position: relative;
+    left: 18%;
+    transition: 1.5s;
+}
+.logo3{
+	
+    width: 122px;
+    position: relative;
+    left: 15%;
+    transition: 1.5s;
+}
+
+
+.logo2:hover{
+    transform: scale(1.1);
+}
+
+
+/*SEÇÃO*/
+/*Abaixo do header BODY*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
