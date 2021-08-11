@@ -1,9 +1,14 @@
 <?php
+
+session_start();
+if(!isset($_SESSION['msg'])){
+  $_SESSION['msg'] = "";
+}
 include_once 'controller/PessoaController.php';
 include_once './model/Pessoa.php';
 include_once './model/Mensagem.php';
-$pe = new Pessoa();
 $msg = new Mensagem();
+$pe = new Pessoa();
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -82,10 +87,11 @@ $msg = new Mensagem();
         
         ?>
   <main class="form-signin">
-    <form  method="post" action=""> <!-- Não pode faltar o método POST --> 
+    <form  method="post" action="/controller/validaLogin.php"> <!-- Não pode faltar o método POST --> 
       <img class="mb-4" src="img/Ícone-Carrinho-de-Compras-PNG.png" alt="" width="62" height="57">
       <h1 class="h3 mb-3 fw-normal text-white">Login</h1>
-
+        <?php $_SESSION['msg'];
+        ?>
       <div class="form-floating">
         <input type="text" class="form-control"  name="login" >
         <label for="floatingInput">Login</label>
