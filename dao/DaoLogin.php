@@ -39,6 +39,5 @@ class DaoLogin
             $msg->setMsg("<p style='color: red;'>"
                 . "Erro na conexão com o banco de dados.</p>");
         }
-       
     }
 }

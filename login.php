@@ -62,7 +62,7 @@ $pe = new Pessoa();
 
 <body class="text-center bg-dark">
 <?php
-        if (isset($_POST['enviar'])){
+        if (isset($_POST['Enviar'])){
             include_once './dao/daoPessoa.php';
             
             $login = trim($_POST['login']);
@@ -78,7 +78,7 @@ $pe = new Pessoa();
                 
             }else{
                 
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"0;
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                 URL='login.php'\">";
             }
 
@@ -87,7 +87,7 @@ $pe = new Pessoa();
         
         ?>
   <main class="form-signin">
-    <form  method="post" action="/controller/validaLogin.php"> <!-- Não pode faltar o método POST --> 
+    <form  method="post" action="controller/validaLogin.php"> <!-- Não pode faltar o método POST --> 
       <img class="mb-4" src="img/Ícone-Carrinho-de-Compras-PNG.png" alt="" width="62" height="57">
       <h1 class="h3 mb-3 fw-normal text-white">Login</h1>
         <?php $_SESSION['msg'];
